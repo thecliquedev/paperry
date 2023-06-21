@@ -1,0 +1,457 @@
+:root {
+  /* The intrinsic width of the underline stroke (in pixels). This is 
+     * the same as the height of the cap images. Don't specify the
+     * units! This is because of some of the calculations we do later on. */
+  --underline-intrinsic-width: 8;
+
+  /* The actual width of the underline stroke we want to render (in pixels).
+     * You can modify this, and the sizing and positioning should be calculated
+     * accordingly. Again, Don't specify the units! */
+  --underline-width: 12;
+
+  /* The color used to draw the underline. It should match the color
+     * used in the cap images... unfortunately we can't modify the SVG
+     * fill via CSS because it's a background image. */
+  --underline-color: #a0bb5f;
+
+  /* We need to know the width of the cap images so that we
+     * can position everything on the x axis accordingly. */
+  --underline-cap-width: 0px;
+
+  /* The border is positioned relative to the bottom of the line.
+     * We can move it upwards a little to create an overlap effect. */
+  --underline-offset-y: -2px;
+
+  /* The padding to add to the x axis. By default, the caps would be
+     * aligned with the beginning and end of the line. */
+  --underline-padding-x: 0.12em;
+}
+
+.underline-text {
+  display: inline;
+  --underline-width-scale: calc(
+    var(--underline-width) / var(--underline-intrinsic-width)
+  );
+  /* padding: 0
+    calc(
+      var(--underline-padding-x) +
+        calc(var(--underline-cap-width) * var(--underline-width-scale))
+    ); */
+  box-decoration-break: clone;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(
+      180deg,
+      var(--underline-color),
+      var(--underline-color)
+    ),
+    var(--cap-image-left), var(--cap-image-right);
+  background-position-x: calc(
+      var(--underline-cap-width) * var(--underline-width-scale)
+    ),
+    0, 100%;
+  background-position-y: calc(100% - var(--underline-offset-y) * -1);
+  background-size: calc(100% - calc(var(--underline-cap-width) * var(--underline-width-scale) * 2))
+      calc(var(--underline-width) * 1px),
+    auto calc(var(--underline-width) * 1px),
+    auto calc(var(--underline-width) * 1px);
+  --underline-width: 20;
+  --underline-offset-y: -2px;
+  /* The cap images to use that form the left and right shape.*/
+  --cap-image-left: none;
+  --cap-image-right: none;
+}
+
+.usp-title{
+    font-size: 4rem;
+    width: 20%;
+    text-align: start;
+    padding: 0px 10px 0px 50px;
+}
+
+.prod-desc {
+  position: absolute;
+  top: -25%;
+  left: 65%;
+  width: max-content;
+}
+
+.desc1 {
+  top: -10%;
+  left: 65%;
+}
+.desc3 {
+  top: -70%;
+  left: 35%;
+}
+.desc-left {
+  left: 50%;
+}
+.desc-lower {
+  top: -5%;
+}
+
+.prod-img1 {
+  width: 90%;
+}
+.prod-desc img {
+  object-fit: contain;
+}
+.prod-img2 {
+  width: 300px;
+  margin-left: 30px;
+}
+
+.prod-title h1 {
+  color: #1f5e42;
+  font-size: 3.5rem;
+  position: relative;
+  letter-spacing: 1.6px;
+  margin-left: 20px;
+}
+.prod-title h3 {
+  color: #1f5e42;
+  font-size: 1.5rem;
+  position: relative;
+  margin-left: 20px;
+}
+.prod-title h1::after {
+  position: absolute;
+  content: "";
+  width: 10%;
+  height: 15px;
+  bottom: -5px;
+  left: 0;
+  background-color: #a0bb5f;
+  font-size: 4.5rem;
+}
+
+.prod-features {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: start;
+}
+
+.prod-features div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  max-width: 110px;
+  text-align: center;
+}
+
+.prod-features div img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+.prod-features div p {
+  font-size: 0.6rem;
+  padding: 10px 0px;
+  color: black;
+  font-weight: 600;
+}
+
+.handle-title {
+  text-align: center;
+  padding: 20px;
+  font-weight: 700;
+  color: #1f5e42;
+  margin: 0px auto;
+  padding: 10px 20px;
+  width: max-content;
+  font-size: 2rem;
+  border: 1px solid #a0bb5f;
+}
+
+.handle-images {
+  width: 100%;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.handle-images .feature {
+  margin: 10px 40px;
+  max-width: 200px;
+}
+
+.handle-images .feature img {
+  height: 120px;
+  width: 120px;
+}
+
+.sec-title-bg {
+  position: absolute;
+  bottom: 100px;
+  left: 50px;
+  display: block;
+  z-index: 3;
+  width: 300px;
+  height: 40px;
+  background-color: white;
+  padding-left: 30px;
+}
+
+.sec-title-center-bg{
+  position: absolute;
+  top: 10%;
+  left: 50px;
+  width: 100%;
+  display: block;
+  z-index: 3;
+  height: 40px;
+  text-align:center;
+}
+
+.sec-title-center-bg p{
+  color: white;
+  font-size: 1.1rem;
+}
+
+.sec-title-center{
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 80px;
+  color: white;
+  margin: 0 auto;
+}
+
+.sec-title {
+  position: absolute;
+  bottom: 0;
+  font-weight: 800;
+  font-size: 50px;
+}
+.sec-title span {
+  font-weight: 200;
+}
+
+.prod-usps-icons{
+  width: 75%;
+}
+
+.custom-title-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  width: 60%;
+}
+
+.custom-title-box h1{
+  font-size: 5rem;
+  color: white;
+  position: relative;
+  margin-bottom: 30px;
+}
+.custom-title-box h1::after{
+  position: absolute;
+  content: "";
+  width: 5%;
+  height: 10px;
+  background-color: white;
+  left: 1%;
+  bottom: 0;
+}
+.custom-title-box h1 span{
+  -webkit-text-stroke: 2px white;
+  color: transparent;
+  background-color: transparent;
+}
+.custom-title-box p{
+  font-size: 1.2rem;
+  color: white;
+  width: 90%;
+}
+
+.vision-title::before{
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: -80px;
+  bottom: 20%;
+  background: url(../images/product_images/2x/0Asset\ 2@2x.png) no-repeat;
+  background-size: contain;
+}
+.mission-title::before{
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: -80px;
+  bottom: 20%;
+  background: url(../images/product_images/2x/0Asset\ 3@2x.png) no-repeat;
+  background-size: contain;
+}
+
+.prod-cap{
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.prod-cap .cap{
+  display: flex;
+  flex-direction: column;
+  justify-self: start;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0;
+  max-width: 200px;
+}
+
+.prod-cap .cap img{
+  width: 80px;
+  height: auto;
+}
+
+.prod-cap .cap h2{
+  padding-top: 20px;
+  font-size: 2rem;
+  color: rgb(230, 55, 55);
+}
+.prod-cap .cap h1{
+  font-size: 4rem;
+}
+.prod-cap .cap p{
+  text-align: center;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.prod-cap-title{
+  position: absolute;
+  top: 0;
+  background-color: #1f5e42;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 0px;
+  font-size: 2.5rem;
+  border-radius: 0px 50px 50px 0px;
+}
+
+.prod-cap p{
+  color: rgb(21, 21, 21);
+  font-size: 1.4rem;
+  text-align: justify;
+}
+
+.prod-curve{
+  width: 100px;  
+}
+
+@media screen and (max-width: 1200px) {
+  .prod-title h1 {
+    color: rgb(7, 91, 10);
+    font-size: 3rem;
+    position: relative;
+    letter-spacing: 1.6px;
+    margin-top: 300px;
+  }
+}
+@media screen and (max-width: 990px) {
+  .sec-title-center-bg{
+    top: 10px;
+    left: 0;
+  }
+  .sec-title-center-bg p{
+    font-size: 2.5vw;
+  }
+  .sec-title-center{
+    font-size: 40px;
+
+  }
+  .prod-desc {
+    position: relative;
+    top: -0%;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0px;
+  }
+  .prod-usp-img{
+    display: none;
+  }
+  .usp-title{
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .prod-img1 {
+    width: 100%;
+  }
+  .prod-img2 {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 20px 0px;
+    /* transform: scale(1.5); */
+  }
+  .prod-curve {
+    display: none;
+  }
+  .prod-title h1 {
+    font-size: 2rem;
+    position: relative;
+    letter-spacing: 1.6px;
+    margin-top: 00px;
+    padding-bottom: 5px;
+  }
+  .sec-title-bg{
+    display: none;
+  }
+  .prod-usps-icons{
+    width: 95%;
+  }
+  .custom-title-box h1{
+    font-size: 3rem;
+    padding-bottom: 10px;
+  }
+  .custom-title-box p{
+    font-size: 1rem;
+  }
+  .vision-title::before, .mission-title::before{
+    bottom: 0%;
+  }
+  .prod-main section{
+    border-bottom: 1px solid black;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .handle-images{
+    flex-direction: column;
+  }
+  .custom-title-box{
+    width: 90%;
+    margin-left: 50px;
+  }
+  .custom-title-box h1{
+    text-align: center;
+    font-size: 2rem;
+  }
+  .custom-title-box p{
+    text-align: left;
+    padding-right: 10px;
+  }
+  .custom-title-box h1 span{
+    -webkit-text-stroke-width: 0.5px;
+  }
+  .custom-title-box h1::after{
+    display: none;
+  }
+  .custom-title-box h1::before{
+    left: -20px;
+    top: 20%;
+  }
+  .prod-cap{
+    flex-direction: column;
+  }
+}
